@@ -1,0 +1,99 @@
+@if (IsVisible)
+{
+    <div class="modal fade show" style="display:block; background-color: rgba(10,10,10,.8);" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header @HeaderClass text-white">
+                    <h5 class="modal-title">
+                        <i class="@IconClass me-2"></i>@Title
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" aria-label="Close" @onclick="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="mb-0">@Message</p>
+                </div>
+                <div class="modal-footer border-0">
+                    @if (Type == ModalType.Question)
+                    {
+                        <button type="button" class="btn btn-secondary px-4" @onclick="Close">Cancel</button>
+                        <button type="button" class="btn btn-primary px-4" @onclick="Confirm">Confirm</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn @ButtonClass px-4" @onclick="Close">OK</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Title { get; set; } = "Notification";
+    [Parameter] public string Message { get; set; } = "";
+    [Parameter] public ModalType Type { get; set; } = ModalType.Info;
+    [Parameter] public EventCallback<bool> OnClose { get; set; }
+
+    private bool IsVisible { get; set; }
+
+    public void Show()
+    {
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    public void Hide()
+    {
+        IsVisible = false;
+        StateHasChanged();
+    }
+
+    private async Task Close()
+    {
+        IsVisible = false;
+        if (OnClose.HasDelegate)
+            await OnClose.InvokeAsync(false);
+    }
+
+    private async Task Confirm()
+    {
+        IsVisible = false;
+        if (OnClose.HasDelegate)
+            await OnClose.InvokeAsync(true);
+    }
+
+    private string HeaderClass => Type switch
+    {
+        ModalType.Info => "bg-info",
+        ModalType.Warning => "bg-warning",
+        ModalType.Error => "bg-danger",
+        ModalType.Question => "bg-primary",
+        _ => "bg-secondary"
+    };
+
+    private string IconClass => Type switch
+    {
+        ModalType.Info => "bi bi-info-circle-fill",
+        ModalType.Warning => "bi bi-exclamation-triangle-fill",
+        ModalType.Error => "bi bi-x-circle-fill",
+        ModalType.Question => "bi bi-question-circle-fill",
+        _ => "bi bi-bell-fill"
+    };
+
+    private string ButtonClass => Type switch
+    {
+        ModalType.Info => "btn-info text-white",
+        ModalType.Warning => "btn-warning text-dark",
+        ModalType.Error => "btn-danger",
+        ModalType.Question => "btn-primary",
+        _ => "btn-secondary"
+    };
+
+    public enum ModalType
+    {
+        Info,
+        Warning,
+        Error,
+        Question
+    }
+}

@@ -47,8 +47,11 @@
         </ul>
     </section>
 
-    <button @onclick="GoToFirst">Take me to the First Page</button>
-    <button @onclick="GoToSecond">Take me to the Second Page</button>
+    <div class="mt-4">
+        <button class="btn btn-outline-primary" @onclick="GoToFirst">Take me to the First Page</button>
+        <button class="btn btn-outline-primary" @onclick="GoToSecond">Take me to the Second Page</button>
+        <button class="btn btn-outline-primary" @onclick="GoToThird">Take me to the Third Page</button>
+    </div>
 </div>
 
 @* 4. THE CODE BLOCK: Pure C# Logic *@
@@ -83,5 +86,12 @@
         // This is the programmatic way to change pages
         // instead of using an <a href="..."> link.
         NavManager.NavigateTo("/second");
+    }
+
+    private void GoToThird()
+    {
+        // This is the programmatic way to change pages
+        // instead of using an <a href="..."> link.
+        NavManager.NavigateTo("/thirdpage");
     }
 }

@@ -1,0 +1,105 @@
+@page "/thirdpage"
+@using MySolution.MyBlazorWASM.Components
+@inject NavigationManager NavManager
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center py-3 position-relative">
+             <button class="btn btn-sm btn-outline-light position-absolute start-0 ms-3 top-50 translate-middle-y" @onclick="GoHome">
+                <i class="bi bi-arrow-left me-1"></i> Home
+            </button>
+            <h1 class="h3 mb-0">Modal Interaction Showcase</h1>
+        </div>
+        <div class="card-body p-4 text-center">
+            <p class="lead mb-4">Demonstrating different usage modes of the <code>MyModal</code> component.</p>
+            
+            <div class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                    <button class="btn btn-info w-100 py-2 text-white shadow-sm" @onclick="ShowInfo">
+                        <i class="bi bi-info-circle me-1"></i> Info Modal
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-warning w-100 py-2 shadow-sm" @onclick="ShowWarning">
+                        <i class="bi bi-exclamation-triangle me-1"></i> Warning Modal
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-danger w-100 py-2 shadow-sm" @onclick="ShowError">
+                        <i class="bi bi-x-circle me-1"></i> Error Modal
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100 py-2 shadow-sm" @onclick="ShowQuestion">
+                        <i class="bi bi-question-circle me-1"></i> Question Modal
+                    </button>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(LastResult))
+            {
+                <div class="alert alert-light border mt-5 fade show" role="alert">
+                    <i class="bi bi-chat-right-text me-2"></i> 
+                    <strong>Last Interaction Result:</strong> @LastResult
+                </div>
+            }
+        </div>
+        <div class="card-footer text-center bg-transparent border-0 pb-4">
+             <button class="btn btn-secondary px-5" @onclick="GoHome">Return to Home Page</button>
+        </div>
+    </div>
+</div>
+
+<MyModal @ref="modal" Title="@ModalTitle" Message="@ModalMessage" Type="@ModalType" OnClose="HandleModalResult" />
+
+@code {
+    private MyModal modal;
+    private string ModalTitle;
+    private string ModalMessage;
+    private MyModal.ModalType ModalType;
+    private string LastResult;
+
+    private void ShowInfo()
+    {
+        ModalTitle = "Information";
+        ModalMessage = "The operation was completed successfully.";
+        ModalType = MyModal.ModalType.Info;
+        modal.Show();
+    }
+
+    private void ShowWarning()
+    {
+        ModalTitle = "Warning";
+        ModalMessage = "Your account balance is low. Please consider topping up.";
+        ModalType = MyModal.ModalType.Warning;
+        modal.Show();
+    }
+
+    private void ShowError()
+    {
+        ModalTitle = "Critical Error";
+        ModalMessage = "An unexpected error occurred while processing your request. Please try again later.";
+        ModalType = MyModal.ModalType.Error;
+        modal.Show();
+    }
+
+    private void ShowQuestion()
+    {
+        ModalTitle = "Confirmation Required";
+        ModalMessage = "Are you sure you want to delete this item? This action cannot be undone.";
+        ModalType = MyModal.ModalType.Question;
+        modal.Show();
+    }
+
+    private void HandleModalResult(bool confirmed)
+    {
+        LastResult = ModalType == MyModal.ModalType.Question 
+            ? (confirmed ? "User confirmed the action." : "User cancelled the action.")
+            : "User acknowledged the message.";
+    }
+
+    private void GoHome()
+    {
+        NavManager.NavigateTo("/");
+    }
+}
