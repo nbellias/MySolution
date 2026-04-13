@@ -1,0 +1,155 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071bc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.btn-outline-primary {
+    color: #1b6ec2;
+    border-color: #1b6ec2;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHZpZXdCb3g9IjAgMCA1NiA1NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOTQgOTRMLTIgLTIiIHN0cm9rZT0iI0VBRUFFQSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTk0IC0yTC0yIDk0IiBzdHJva2U9IiNFQUVBRUEiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==);
+    padding: 1rem;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred.";
+        color: gold;
+        background: black;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.25rem;
+        font-weight: bold;
+    }
+
+.loading-progress {
+    position: relative;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    margin: 20vh auto 1rem auto;
+}
+
+    .loading-progress circle {
+        fill: none;
+        stroke: #e0e0e0;
+        stroke-width: 0.6rem;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+    }
+
+        .loading-progress circle:last-child {
+            stroke: #1b6ec2;
+            stroke-dasharray: calc(3.141 * 0.8 * 100%);
+            stroke-dashoffset: calc(3.141 * 0.8 * (100% - var(--blazor-load-percentage, 0%)));
+            transition: stroke-dashoffset 0.05s linear;
+        }
+
+.loading-progress-text {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    top: -90px;
+}
+
+    .loading-progress-text::after {
+        content: var(--blazor-load-percentage-text, "Loading...");
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth) {
+        display: none;
+    }
+
+    .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row {
+        justify-content: flex-end;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 1.5rem;
+    }
+
+    .content {
+        padding-top: 1.5rem;
+    }
+
+    .main > div {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}

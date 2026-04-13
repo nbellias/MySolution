@@ -1,0 +1,48 @@
+@page "/second"
+@using MySolution.MyBlazorWASM.Components
+
+@inject NavigationManager Navigation
+
+<PageTitle>Home</PageTitle>
+
+<div class="vh-100 d-flex flex-column align-items-center justify-content-center text-center">
+    <h1 class="display-1 mb-4 text-primary fw-bold">Blazor Magic</h1>
+    <button @onclick="GoToHome">Take me Home</button>
+    <p class="lead mb-5 text-secondary">A spectacular button for a spectacular developer.</p>
+
+    <MyButton Text="Experience the Ripple"
+              IconClass="bi bi-stars"
+              OnClick="@HandleClick" />
+
+    @if (clicked)
+    {
+        <p class="mt-4 animate-bounce text-success fw-bold">Spectacular! 🎉</p>
+    }
+</div>
+
+@code {
+    private bool clicked = false;
+
+    private void HandleClick()
+    {
+        clicked = true;
+    }
+
+    private void GoToHome()
+    {
+        // This is the programmatic way to change pages
+        // instead of using an <a href="..."> link.
+        Navigation.NavigateTo("/");
+    }
+}
+
+<style>
+    .vh-100 { height: 100vh; }
+    .animate-bounce {
+        animation: bounce 0.5s infinite alternate;
+    }
+    @@keyframes bounce {
+        from { transform: translateY(0); }
+        to { transform: translateY(-10px); }
+    }
+</style>

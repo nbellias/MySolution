@@ -1,0 +1,16 @@
+@namespace MySolution.MyBlazorWASM.Components
+
+<button @ref="_buttonRef"
+        class="spectacular-button @(Disabled ? "disabled" : "")"
+        @onclick="HandleClick"
+        disabled="@Disabled">
+    @if (IsLoading)
+    {
+        <div class="loading-spinner"></div>
+    }
+    else
+    {
+        <i class="@IconClass icon"></i>
+        <span>@Text</span>
+    }
+</button>

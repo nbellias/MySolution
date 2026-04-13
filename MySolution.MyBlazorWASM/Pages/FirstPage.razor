@@ -1,0 +1,78 @@
+@page "/first"
+@page "/first/{JustAName}"
+
+@using System.Timers
+
+@implements IDisposable
+
+@inject UserSession Session
+@inject NavigationManager NavManager
+
+<PageTitle>Blazor Discovery home</PageTitle>
+
+<div style="padding: 20px; font-family: sans-serif;">
+    <h1>Blazor Feature Demo First Page</h1>
+    <h3>Welcome again @Session.CurrentUser</h3>
+
+    @if (@JustAName != null)
+    {
+        <h2>Hey, @JustAName</h2>
+    }
+</div>
+<button @onclick="GoToHome">Take me Home</button>
+
+<h3>Timer with Cleanup</h3>
+<p>Status: @_statusMessage</p>
+<p>Elapsed Seconds: @_secondsElapsed</p>
+<p>The time is: @_currentTime</p>
+
+@code {
+    private string _currentTime = DateTime.Now.ToLongTimeString();
+    private int _secondsElapsed = 0;
+    private readonly string _statusMessage = "Timer Running...";
+    private Timer? _timer;
+
+    [Parameter]
+    public string JustAName { get; set; } = "Guest";
+
+    protected override void OnInitialized()
+    {
+        _timer = new Timer(1000); // 1000ms = 1 second
+        _timer.Elapsed += OnTimerElapsed;
+        _timer.AutoReset = true;
+        _timer.Enabled = true;
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        _secondsElapsed++;
+        _currentTime = DateTime.Now.ToLongTimeString();
+
+        // We must tell Blazor to "re-render" because the timer
+        // is running in the background, not from a UI click.
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void LeaveEarly()
+    {
+        NavManager.NavigateTo("/");
+    }
+
+    private void GoToHome()
+    {
+        // This is the programmatic way to change pages
+        // instead of using an <a href="..."> link.
+        NavManager.NavigateTo("/");
+    }
+
+    @* 2. This method runs automatically when the user leaves the page *@
+    public void Dispose()
+    {
+        if (_timer != null)
+        {
+            _timer.Stop();      // Stop the ticking
+            _timer.Dispose();   // Delete the timer from memory
+            Console.WriteLine("Timer successfully cleaned up!");
+        }
+    }
+}

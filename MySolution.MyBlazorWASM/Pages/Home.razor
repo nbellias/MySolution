@@ -1,0 +1,87 @@
+@* 1. DIRECTIVES: The "Rules" of the page *@
+@page "/"
+
+@inject UserSession Session
+@inject NavigationManager NavManager
+
+@* 2. CONTROL FLOW: Logic inside the UI *@
+<PageTitle>Blazor Discovery home</PageTitle>
+
+<div style="padding: 20px; font-family: sans-serif;">
+    <h1>Blazor Feature Demo Home</h1>
+    <h3>Welcome @Session.CurrentUser</h3>
+
+    @if (_currentCount < 10)
+    {
+        <div style="color: gray;">Keep clicking... you are at @_currentCount</div>
+    }
+    else
+    {
+        <div style="color: green; font-weight: bold;">🌟 Goal Reached! 🌟</div>
+    }
+
+    <hr />
+
+    @* 3. BINDINGS & EVENTS: Linking HTML to C# *@
+    <section>
+        <h3>Data Binding & Events</h3>
+
+        <input @bind="_userName" @bind:event="oninput" placeholder="Enter your name" />
+
+        <p>Hello, <strong>@_userName</strong>!</p>
+
+        <button class="btn btn-primary" @onclick="IncrementCount">
+            Increment Count
+        </button>
+    </section>
+
+    <hr />
+
+    <section>
+        <h3>Loops (Control Flow)</h3>
+        <ul>
+            @foreach (var log in _history)
+            {
+                <li>@log</li>
+            }
+        </ul>
+    </section>
+
+    <button @onclick="GoToFirst">Take me to the First Page</button>
+    <button @onclick="GoToSecond">Take me to the Second Page</button>
+</div>
+
+@* 4. THE CODE BLOCK: Pure C# Logic *@
+@code {
+    // Variables & Properties
+    private int _currentCount = 0;
+    private string _userName = "Learner";
+    private List<string> _history = new List<string>();
+
+    // A standard Method
+    private void IncrementCount()
+    {
+        _currentCount++;
+        _history.Add($"Clicked at {DateTime.Now.ToLongTimeString()} - New total: {_currentCount}");
+    }
+
+    // Lifecycle Method: Runs when the page is first loaded
+    protected override void OnInitialized()
+    {
+        _history.Add("Page initialized and ready!");
+    }
+
+    private void GoToFirst()
+    {
+        // This is the programmatic way to change pages
+        // instead of using an <a href="..."> link.
+        NavManager.NavigateTo("/first");
+    }
+
+    private void GoToSecond()
+    {
+        // This is the programmatic way to change pages
+        // instead of using an <a href="..."> link.
+        NavManager.NavigateTo("/second");
+    }
+}
