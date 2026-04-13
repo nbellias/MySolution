@@ -3,49 +3,41 @@
 @inject NavigationManager NavManager
 
 <div class="container mt-5">
-    <div class="card shadow">
+    <div class="card shadow border-0 overflow-hidden">
         <div class="card-header bg-dark text-white text-center py-3 position-relative">
-             <button class="btn btn-sm btn-outline-light position-absolute start-0 ms-3 top-50 translate-middle-y" @onclick="GoHome">
-                <i class="bi bi-arrow-left me-1"></i> Home
-            </button>
+             <div class="position-absolute start-0 ms-3 top-50 translate-middle-y">
+                <MyButton Text="Home" IconClass="bi bi-arrow-left" OnClick="GoHome" />
+            </div>
             <h1 class="h3 mb-0">Modal Interaction Showcase</h1>
         </div>
         <div class="card-body p-4 text-center">
-            <p class="lead mb-4">Demonstrating different usage modes of the <code>MyModal</code> component.</p>
+            <p class="lead mb-4 font-monospace">Demonstrating <code>MyModal</code> with <code>MyButton</code> components.</p>
             
             <div class="row g-3 justify-content-center">
                 <div class="col-md-3">
-                    <button class="btn btn-info w-100 py-2 text-white shadow-sm" @onclick="ShowInfo">
-                        <i class="bi bi-info-circle me-1"></i> Info Modal
-                    </button>
+                    <MyButton Text="Info" IconClass="bi bi-info-circle" OnClick="ShowInfo" />
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-warning w-100 py-2 shadow-sm" @onclick="ShowWarning">
-                        <i class="bi bi-exclamation-triangle me-1"></i> Warning Modal
-                    </button>
+                    <MyButton Text="Warning" IconClass="bi bi-exclamation-triangle" OnClick="ShowWarning" />
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-danger w-100 py-2 shadow-sm" @onclick="ShowError">
-                        <i class="bi bi-x-circle me-1"></i> Error Modal
-                    </button>
+                    <MyButton Text="Error" IconClass="bi bi-x-circle" OnClick="ShowError" />
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-primary w-100 py-2 shadow-sm" @onclick="ShowQuestion">
-                        <i class="bi bi-question-circle me-1"></i> Question Modal
-                    </button>
+                    <MyButton Text="Confirm?" IconClass="bi bi-question-circle" OnClick="ShowQuestion" />
                 </div>
             </div>
 
             @if (!string.IsNullOrEmpty(LastResult))
             {
-                <div class="alert alert-light border mt-5 fade show" role="alert">
+                <div class="alert alert-light border mt-5 fade show shadow-sm" role="alert">
                     <i class="bi bi-chat-right-text me-2"></i> 
-                    <strong>Last Interaction Result:</strong> @LastResult
+                    <strong>Interaction Log:</strong> @LastResult
                 </div>
             }
         </div>
-        <div class="card-footer text-center bg-transparent border-0 pb-4">
-             <button class="btn btn-secondary px-5" @onclick="GoHome">Return to Home Page</button>
+        <div class="card-footer text-center bg-light py-4">
+             <MyButton Text="Return to Home Page" IconClass="bi bi-house-door" OnClick="GoHome" />
         </div>
     </div>
 </div>

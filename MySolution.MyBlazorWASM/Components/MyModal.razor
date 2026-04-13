@@ -15,12 +15,12 @@
                 <div class="modal-footer border-0">
                     @if (Type == ModalType.Question)
                     {
-                        <button type="button" class="btn btn-secondary px-4" @onclick="Close">Cancel</button>
-                        <button type="button" class="btn btn-primary px-4" @onclick="Confirm">Confirm</button>
+                        <MyButton Text="Cancel" IconClass="bi bi-x" OnClick="Close" />
+                        <MyButton Text="Confirm" IconClass="bi bi-check-lg" OnClick="Confirm" />
                     }
                     else
                     {
-                        <button type="button" class="btn @ButtonClass px-4" @onclick="Close">OK</button>
+                        <MyButton Text="OK" IconClass="bi bi-check" OnClick="Close" />
                     }
                 </div>
             </div>
@@ -78,15 +78,6 @@
         ModalType.Error => "bi bi-x-circle-fill",
         ModalType.Question => "bi bi-question-circle-fill",
         _ => "bi bi-bell-fill"
-    };
-
-    private string ButtonClass => Type switch
-    {
-        ModalType.Info => "btn-info text-white",
-        ModalType.Warning => "btn-warning text-dark",
-        ModalType.Error => "btn-danger",
-        ModalType.Question => "btn-primary",
-        _ => "btn-secondary"
     };
 
     public enum ModalType

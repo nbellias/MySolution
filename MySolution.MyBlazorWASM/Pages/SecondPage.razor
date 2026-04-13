@@ -7,7 +7,11 @@
 
 <div class="vh-100 d-flex flex-column align-items-center justify-content-center text-center">
     <h1 class="display-1 mb-4 text-primary fw-bold">Blazor Magic</h1>
-    <button @onclick="GoToHome">Take me Home</button>
+    
+    <div class="mb-4">
+        <MyButton Text="Take me Home" IconClass="bi bi-house-door" OnClick="GoToHome" />
+    </div>
+
     <p class="lead mb-5 text-secondary">A spectacular button for a spectacular developer.</p>
 
     <MyButton Text="Experience the Ripple"

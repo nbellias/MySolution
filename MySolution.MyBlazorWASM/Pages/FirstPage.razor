@@ -2,6 +2,7 @@
 @page "/first/{JustAName}"
 
 @using System.Timers
+@using MySolution.MyBlazorWASM.Components
 
 @implements IDisposable
 
@@ -18,13 +19,18 @@
     {
         <h2>Hey, @JustAName</h2>
     }
-</div>
-<button @onclick="GoToHome">Take me Home</button>
 
-<h3>Timer with Cleanup</h3>
-<p>Status: @_statusMessage</p>
-<p>Elapsed Seconds: @_secondsElapsed</p>
-<p>The time is: @_currentTime</p>
+    <div class="my-3">
+        <MyButton Text="Take me Home" IconClass="bi bi-house-door" OnClick="GoToHome" />
+    </div>
+
+    <hr />
+
+    <h3>Timer with Cleanup</h3>
+    <p>Status: @_statusMessage</p>
+    <p>Elapsed Seconds: @_secondsElapsed</p>
+    <p>The time is: @_currentTime</p>
+</div>
 
 @code {
     private string _currentTime = DateTime.Now.ToLongTimeString();
@@ -53,19 +59,11 @@
         InvokeAsync(StateHasChanged);
     }
 
-    private void LeaveEarly()
-    {
-        NavManager.NavigateTo("/");
-    }
-
     private void GoToHome()
     {
-        // This is the programmatic way to change pages
-        // instead of using an <a href="..."> link.
         NavManager.NavigateTo("/");
     }
 
-    @* 2. This method runs automatically when the user leaves the page *@
     public void Dispose()
     {
         if (_timer != null)

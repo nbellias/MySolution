@@ -1,6 +1,7 @@
 @* 1. DIRECTIVES: The "Rules" of the page *@
 @page "/"
 
+@using MySolution.MyBlazorWASM.Components
 @inject UserSession Session
 @inject NavigationManager NavManager
 
@@ -26,13 +27,11 @@
     <section>
         <h3>Data Binding & Events</h3>
 
-        <input @bind="_userName" @bind:event="oninput" placeholder="Enter your name" />
+        <input @bind="_userName" @bind:event="oninput" placeholder="Enter your name" class="form-control d-inline-block w-auto me-2" />
 
         <p>Hello, <strong>@_userName</strong>!</p>
 
-        <button class="btn btn-primary" @onclick="IncrementCount">
-            Increment Count
-        </button>
+        <MyButton Text="Increment Count" IconClass="bi bi-plus-circle" OnClick="IncrementCount" />
     </section>
 
     <hr />
@@ -47,10 +46,10 @@
         </ul>
     </section>
 
-    <div class="mt-4">
-        <button class="btn btn-outline-primary" @onclick="GoToFirst">Take me to the First Page</button>
-        <button class="btn btn-outline-primary" @onclick="GoToSecond">Take me to the Second Page</button>
-        <button class="btn btn-outline-primary" @onclick="GoToThird">Take me to the Third Page</button>
+    <div class="mt-4 d-flex gap-2">
+        <MyButton Text="First Page" IconClass="bi bi-1-circle" OnClick="GoToFirst" />
+        <MyButton Text="Second Page" IconClass="bi bi-2-circle" OnClick="GoToSecond" />
+        <MyButton Text="Third Page" IconClass="bi bi-3-circle" OnClick="GoToThird" />
     </div>
 </div>
 
@@ -76,22 +75,16 @@
 
     private void GoToFirst()
     {
-        // This is the programmatic way to change pages
-        // instead of using an <a href="..."> link.
         NavManager.NavigateTo("/first");
     }
 
     private void GoToSecond()
     {
-        // This is the programmatic way to change pages
-        // instead of using an <a href="..."> link.
         NavManager.NavigateTo("/second");
     }
 
     private void GoToThird()
     {
-        // This is the programmatic way to change pages
-        // instead of using an <a href="..."> link.
         NavManager.NavigateTo("/thirdpage");
     }
 }
