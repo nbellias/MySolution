@@ -1,0 +1,33 @@
+@inherits LayoutComponentBase
+
+<div class="app-layout">
+    <main class="app-layout__content">
+        <!-- Layout Content Start -->
+        @Body
+        <!-- Layout Content End -->
+    </main>
+
+    <footer class="app-layout__trademark">
+        <div class="container">
+            <span>© @DateTime.Now.Year MySolution. All rights reserved.</span>
+        </div>
+    </footer>
+</div>
+
+<style>
+    .app-layout {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .app-layout__content {
+        flex: 1;
+    }
+    .app-layout__trademark {
+        background-color: #1b6ec2;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: auto;
+    }
+</style>

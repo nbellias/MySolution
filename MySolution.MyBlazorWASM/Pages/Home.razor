@@ -50,41 +50,30 @@
         <MyButton Text="First Page" IconClass="bi bi-1-circle" OnClick="GoToFirst" />
         <MyButton Text="Second Page" IconClass="bi bi-2-circle" OnClick="GoToSecond" />
         <MyButton Text="Third Page" IconClass="bi bi-3-circle" OnClick="GoToThird" />
+        <MyButton Text="Contact Demo" IconClass="bi bi-envelope" OnClick="GoToContact" />
     </div>
 </div>
 
 @* 4. THE CODE BLOCK: Pure C# Logic *@
 @code {
-    // Variables & Properties
+    // ... existing variables ...
     private int _currentCount = 0;
     private string _userName = "Learner";
     private List<string> _history = new List<string>();
 
-    // A standard Method
     private void IncrementCount()
     {
         _currentCount++;
         _history.Add($"Clicked at {DateTime.Now.ToLongTimeString()} - New total: {_currentCount}");
     }
 
-    // Lifecycle Method: Runs when the page is first loaded
     protected override void OnInitialized()
     {
         _history.Add("Page initialized and ready!");
     }
 
-    private void GoToFirst()
-    {
-        NavManager.NavigateTo("/first");
-    }
-
-    private void GoToSecond()
-    {
-        NavManager.NavigateTo("/second");
-    }
-
-    private void GoToThird()
-    {
-        NavManager.NavigateTo("/thirdpage");
-    }
+    private void GoToFirst() => NavManager.NavigateTo("/first");
+    private void GoToSecond() => NavManager.NavigateTo("/second");
+    private void GoToThird() => NavManager.NavigateTo("/thirdpage");
+    private void GoToContact() => NavManager.NavigateTo("/contact-demo");
 }

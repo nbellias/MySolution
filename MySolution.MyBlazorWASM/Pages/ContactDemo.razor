@@ -1,0 +1,16 @@
+@page "/contact-demo"
+@using MySolution.MyBlazorWASM.Components
+@using MySolution.MyBlazorWASM.Models
+
+<MyFormPage TModel="Contact" 
+            FormTitle="Contact Demo Form" 
+            SubmitButtonText="Send Contact"
+            OnValidModelSubmit="OnSubmit" />
+
+@code {
+    private Task OnSubmit(Contact model)
+    {
+        // Custom logic can go here
+        return Task.CompletedTask;
+    }
+}
