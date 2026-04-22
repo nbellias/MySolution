@@ -13,4 +13,9 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0-preview.3.24172.13" PrivateAssets="all" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MySolution.MyComponentsLib\MySolution.MyComponentsLib.csproj" />
+      <ProjectReference Include="..\MySolution.Shared\MySolution.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

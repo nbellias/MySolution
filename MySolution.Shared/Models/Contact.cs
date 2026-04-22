@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MySolution.MyBlazorWASM.Models;
+namespace MySolution.Shared.Models;
 
 public class Contact
 {

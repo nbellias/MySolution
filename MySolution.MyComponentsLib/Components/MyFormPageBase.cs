@@ -4,7 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace MySolution.MyBlazorWASM.Components;
+namespace MySolution.MyComponentsLib.Components;
 
 public abstract class MyFormPageBase<TModel> : ComponentBase where TModel : class
 {

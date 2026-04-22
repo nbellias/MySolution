@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="MySolution.MyBlazorWASM/MySolution.MyBlazorWASM.csproj" />
+  <Project Path="MySolution.MyComponentsLib/MySolution.MyComponentsLib.csproj" />
+  <Project Path="MySolution.Shared/MySolution.Shared.csproj" />
 </Solution>

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace MySolution.MyBlazorWASM.Components;
+namespace MySolution.MyComponentsLib.Components;
 
 public partial class MyButton : ComponentBase, IAsyncDisposable
 {
@@ -21,7 +21,7 @@ public partial class MyButton : ComponentBase, IAsyncDisposable
     {
         if (firstRender)
         {
-            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/MyButton.razor.js");
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/MySolution.MyComponentsLib/Components/MyButton.razor.js");
         }
     }
 
